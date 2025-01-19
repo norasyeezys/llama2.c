@@ -41,6 +41,7 @@ make run
 ./run stories15M.bin
 ```
 
+
 You'll see the text stream a sample. On my M1 MacBook Air this runs at ~110 tokens/s. See [performance](#performance) or the Makefile for compile flags that can significantly speed this up. We can also try a bit bigger 42M parameter model:
 
 ```bash
@@ -63,6 +64,15 @@ You can also prompt the model with a prefix or a number of additional command li
 There is also an even better 110M param model available, see [models](#models).
 
 Quick note on sampling, the recommendation for ~best results is to sample with `-t 1.0 -p 0.9`, i.e. temperature 1.0 (default) but also top-p sampling at 0.9 (default). Intuitively, top-p ensures that tokens with tiny probabilities do not get sampled, so we can't get "unlucky" during sampling, and we are less likely to go "off the rails" afterwards. More generally, to control the diversity of samples use either the temperature (i.e. vary `-t` between 0 and 1 and keep top-p off with `-p 0`) or the top-p value (i.e. vary `-p` between 0 and 1 and keep `-t 1`), but not both. Nice explainers on LLM sampling strategies include [this](https://peterchng.com/blog/2023/05/02/token-selection-strategies-top-k-top-p-and-temperature/), [this](https://docs.cohere.com/docs/controlling-generation-with-top-k-top-p) or [this](https://huggingface.co/blog/how-to-generate).
+
+## MY CUSTOM ADDITION
+
+Special version of the above command for Windows 7 + MINGW32.
+```
+gcc.exe -o run run.c win.c -lpthread -lm
+```
+
+Add -DNO_AVX flag after gcc.exe for non-AVX CPUs, as I did.
 
 ## Meta's Llama 2 models
 
