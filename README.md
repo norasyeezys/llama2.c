@@ -74,6 +74,8 @@ gcc.exe -o run run.c win.c -lpthread -lm
 
 Add -DNO_AVX flag after gcc.exe for non-AVX CPUs, as I did.
 
+The result? On a Core 2 Extreme Processor the 15M parameter model runs at 11.9 tokens/second.
+
 ## Meta's Llama 2 models
 
 As the neural net architecture is identical, we can also inference the Llama 2 models released by Meta. Sadly there is a bit of friction here due to licensing (I can't directly upload the checkpoints, I think). So Step 1, get the Llama 2 checkpoints by following the [Meta instructions](https://github.com/facebookresearch/llama). Once we have those checkpoints, we have to convert them into the llama2.c format.
